@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='flex flex-col min-h-screen'>
+      <body className='flex flex-col text-slate min-h-screen bg-gradient-to-tr from-purple-200 via-purple-400 to-purple-800'>
         <Navbar links={Links} />
         {children}
         <Footer />
