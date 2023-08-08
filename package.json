@@ -2,11 +2,23 @@
   "name": "budget-commander",
   "version": "0.1.0",
   "private": true,
+  "description": "Tool and Rules site for Magic the Gather variant budget-commander, where no commander deck total cannot be over $100",
+  "author": {
+    "name": "Nathan Healea",
+    "email": "nate.healea@gmail.com",
+    "url": "https://nathanhealea.com"
+  },
   "scripts": {
+    "clean": "npx rimraf .next",
     "dev": "next dev",
+    "prod": "npm run clean && npm run build && npm start",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npx prettier --write .",
+    "version:major": "npm version major --force",
+    "version:minor": "npm version minor --force",
+    "version:patch": "npm version patch --force"
   },
   "dependencies": {
     "@types/node": "20.4.8",
@@ -21,5 +33,11 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "prettier": "^3.0.1",
+    "prettier-plugin-tailwindcss": "^0.4.1"
   }
 }
+
