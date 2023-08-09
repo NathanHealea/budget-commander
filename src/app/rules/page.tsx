@@ -11,17 +11,20 @@ export default function RulesPage() {
           <h2></h2>
           <ol className='list'>
             <li className='list__item'>
-              Budget Commander adhears to all rules and bans in the{' '}
+              Budget Commander follows the{' '}
               <a className='link' href='' target='_blank'>
                 Command Format
-              </a>
+              </a>{' '}
+              rules and ban list.
             </li>
             <li className='list__item'>
-              A deck must not have current market value greater than $100 USD.
+            Decks must not exceed $100 USD in total market value.
+              <ul className='list p-2 pl-8'>
+                <li>The commander contributes to the deck&apos;s value.</li>
+              </ul>
             </li>
             <li className='list__item'>
-              Cards will be evaluated at current market value of the cheapest
-              print available.
+            Card values are based on the cheapest available print&apos;s market value.
               <ul className='list-none p-2 pl-8'>
                 <li>
                   <em className='text__caption'>
@@ -36,8 +39,7 @@ export default function RulesPage() {
               </ul>
             </li>
             <li className='list__item'>
-              Basic and Basic Snow Covered lands do not count toward a
-              deck&apos;s total value.
+            Basic and Basic Snow-Covered lands are excluded from the deck&apos;s value calculation.
             </li>
           </ol>
         </div>
