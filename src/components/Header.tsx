@@ -18,10 +18,6 @@ interface INavbarProps {
   links: Array<Link>;
 }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Header(props: INavbarProps) {
   const { links = [] } = props;
   const pathname = usePathname();

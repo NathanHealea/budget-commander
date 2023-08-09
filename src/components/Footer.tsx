@@ -24,20 +24,31 @@ export default function Footer() {
               trademark of Wizards of the Coast. For more information about
               Wizards of the Coast or any of Wizards&apos; trademarks or other
               intellectual property, please visit their website at{' '}
-              <a target='_blank' href='https://company.wizards.com/'>
+              <a
+                className='link'
+                target='_blank'
+                href='https://company.wizards.com/'
+              >
                 https://company.wizards.com/
               </a>
               .
             </p>
             <p>
-              Some card prices and other card data are provided Scryfall.
-              Scryfall makes no guarantee about its price information and
+              Some card prices and other card data are provided{' '}
+              <a className='link' target='_blank' href='https://scryfall.com/'>
+                Scryfall
+              </a>
+              . Scryfall makes no guarantee about its price information and
               recommends you see stores for final prices and details.
             </p>
             <p>
               Copyright <FontAwesomeIcon icon={faCopyright} />{' '}
               {new Date().getFullYear()}{' '}
-              <a target='_blank' href='https://nathanhealea.com'>
+              <a
+                className='link'
+                target='_blank'
+                href='https://nathanhealea.com'
+              >
                 Nathan Healea
               </a>
             </p>
