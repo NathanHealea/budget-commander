@@ -1,6 +1,6 @@
 export default function RulesPage() {
   return (
-    <main className='flex flex-1 flex-col min-h-screen '>
+    <main className='flex flex-1 flex-col'>
       <section className='hero'>
         <div className='hero__content'>
           <h1 className='hero__title'>Rules</h1>

@@ -11,7 +11,4 @@
     @apply flex min-h-screen w-full flex-col;
   }
 
-  section {
-    @apply my-32 w-full;
-  }
 }
