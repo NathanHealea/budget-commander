@@ -36,8 +36,8 @@ export default function RulesPage() {
               </ul>
             </li>
             <li className='list__item'>
-              Non named lands (Forest, Island, Mountain, Plain, Swamp, Wast) do
-              not count toward a deck&apos;s total value.
+              Basic and Basic Snow Covered lands do not count toward a
+              deck&apos;s total value.
             </li>
           </ol>
         </div>
