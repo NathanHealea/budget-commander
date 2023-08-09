@@ -22,9 +22,9 @@ export default function RulesPage() {
             <li className='list__item'>
               Cards will be evaluated at current market value of the cheapest
               print available.
-              <ul className='list__subitem'>
+              <ul className='list-none p-2 pl-8'>
                 <li>
-                  <em className='text-sm'>
+                  <em className='text__caption'>
                     Example: Elesh Norn, Grand Cenobite has 11 prints, the most
                     expensive being ~$700 USD (Multiverse Legends ·
                     Doublerainbow) and the cheapest being ~$11 USD (Multiverse

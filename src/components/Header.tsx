@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import classnames from 'classnames';
 
 import { UrlObject } from 'url';
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 type Url = string | UrlObject;
 
 export type Link = {
@@ -36,16 +37,24 @@ export default function Header(props: INavbarProps) {
                     <span className='absolute -inset-0.5' />
                     <span className='sr-only'>Open main menu</span>
                     {open ? (
-                      <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
+                      <FontAwesomeIcon
+                        icon={faTimes}
+                        className='block h-6 w-6'
+                        aria-hidden='true'
+                      />
                     ) : (
-                      <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
+                      <FontAwesomeIcon
+                        icon={faBars}
+                        className='block h-6 w-6'
+                        aria-hidden='true'
+                      />
                     )}
                   </Disclosure.Button>
                 </div>
 
-                <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
+                <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start '>
                   {/* Site Logo */}
-                  <div className='flex flex-shrink-0 items-center font-bold uppercase'>
+                  <div className='flex flex-shrink-0 items-center font-bold uppercase '>
                     Budget Commander
                   </div>
 

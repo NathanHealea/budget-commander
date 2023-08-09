@@ -105,7 +105,4 @@
     @apply list-item p-2;
   }
 
-  .list__subitem {
-    @apply list__item pl-7;
-  }
 }
