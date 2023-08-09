@@ -4,9 +4,8 @@ export default function ThemePage() {
       <section>
         <h1 className='text-xl'>Buttons</h1>
         <div className='button'>Button</div>
-        <div className='button--contained'>Button</div>
+        <div className='button-contained'>Button</div>
         <div className='button-active'>Button</div>
-
       </section>
     </main>
   );
