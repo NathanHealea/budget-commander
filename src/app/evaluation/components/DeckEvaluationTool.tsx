@@ -5,7 +5,7 @@ import DeckEvaluationErrors from './DeckEvaluationErrors';
 import DeckListEvaluationForm from './DeckEvaluationForm';
 import DeckEvaluationSpinner from './DeckEvaluationSpinner';
 import { DeckList } from '../evaluation.types';
-import DeckEvaluation from '../services/DeckEvaluation';
+import DeckEvaluationService from '../services/DeckEvaluationService';
 
 type State = {
   isSubmitting: boolean;
@@ -24,7 +24,7 @@ export default function DeckEvaluationTool() {
       isSubmitting: true,
     });
 
-    const deckList = await DeckEvaluation.evaluate(decklist);
+    const deckList = await DeckEvaluationService.evaluate(decklist);
     console.log(deckList);
     setState({
       ...state,
