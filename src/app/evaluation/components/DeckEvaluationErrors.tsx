@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Card, DeckList } from '../evaluation.types';
 import { Disclosure } from '@headlessui/react';
@@ -6,7 +8,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface IDeckEvaluationErrorsProps {
   isSubmitting?: boolean;
-  deckList?: DeckList;
+  deckList?: DeckList | null;
 }
 
 export default function DeckEvaluationErrors(
@@ -54,7 +56,7 @@ export default function DeckEvaluationErrors(
                 </Disclosure.Button>
                 <Disclosure.Panel className=''>
                   <div className='flex flex-col text__body'>
-                    {deckList.cards
+                    {errorList
                       .filter((card: Card) => card.hasError)
                       .map((card, index) => (
                         <div

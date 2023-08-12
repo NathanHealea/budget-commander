@@ -1,3 +1,31 @@
+import { Metadata } from 'next/types';
+
+const PAGE_TITLE = 'Rules';
+const PAGE_DESCRIPTION =
+  'Rules for the commander variant format Budget Commander';
+
+export const metadata: Metadata = {
+  title: `Budget Commander - ${PAGE_TITLE}`,
+  description: PAGE_DESCRIPTION,
+  twitter: {
+    card: 'summary_large_image',
+    title: `Budget Commander - ${PAGE_TITLE}`,
+    description: PAGE_DESCRIPTION,
+    site: '@nathanhealea',
+    siteId: '2654889620',
+    creator: '@nathanhealea',
+    creatorId: '2654889620',
+    images: [], // TODO: find photos for my twitter card,
+  },
+  openGraph: {
+    type: 'website',
+    title: `Budget Commander - ${PAGE_TITLE}`,
+    description: PAGE_DESCRIPTION,
+    url: 'https://buget-commander.nathanhealea.com',
+    images: [], // TODO: find images for my open Graph.
+  },
+};
+
 export default function RulesPage() {
   return (
     <main className='flex flex-1 flex-col'>
@@ -18,13 +46,14 @@ export default function RulesPage() {
               rules and ban list.
             </li>
             <li className='list__item'>
-            Decks must not exceed $100 USD in total market value.
+              Decks must not exceed $100 USD in total market value.
               <ul className='list p-2 pl-8'>
                 <li>The commander contributes to the deck&apos;s value.</li>
               </ul>
             </li>
             <li className='list__item'>
-            Card values are based on the cheapest available print&apos;s market value.
+              Card values are based on the cheapest available print&apos;s
+              market value.
               <ul className='list-none p-2 pl-8'>
                 <li>
                   <em className='text__caption'>
@@ -39,7 +68,8 @@ export default function RulesPage() {
               </ul>
             </li>
             <li className='list__item'>
-            Basic and Basic Snow-Covered lands are excluded from the deck&apos;s value calculation.
+              Basic and Basic Snow-Covered lands are excluded from the
+              deck&apos;s value calculation.
             </li>
           </ol>
         </div>

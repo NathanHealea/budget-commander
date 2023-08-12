@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import { FormEvent, useEffect, useState } from 'react';
+'use client';
+import { FormEvent, useState } from 'react';
 
 interface IDeckListEvaluationForm {
   isSubmitting?: boolean;
