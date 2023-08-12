@@ -1,7 +1,6 @@
 @tailwind components;
 @layer components {
   /* Typography */
-
   .text__h1 {
     @apply text-5xl sm:text-6xl md:text-8xl  leading-snug;
   }
@@ -39,6 +38,11 @@
     @apply cursor-pointer font-medium hover:underline transition-all ease-in-out;
   }
 
+  /* Input */
+  .input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight outline-none bg-black border-black;
+  }
+
   /* Button  */
   .button {
     @apply text__body rounded-md p-2 px-4 outline-none ring-0 focus:ring-inset cursor-pointer tracking-wide
@@ -55,7 +59,7 @@
 
   /* Shared */
   .content {
-    @apply w-full mx-auto max-w-7xl p-8 pt-4 md:p-16 md:pt-8 flex flex-col gap-8;
+    @apply w-full mx-auto max-w-7xl p-8 py-4 md:p-16 md:py-8 flex flex-col gap-8;
   }
 
   /* Section */
@@ -68,7 +72,11 @@
   }
 
   .section__title {
-    @apply text__h3
+    @apply text__h3;
+  }
+
+  .section__subtitle {
+    @apply text__h4;
   }
 
   .section__content {
@@ -105,4 +113,17 @@
     @apply list-item p-2;
   }
 
+  /* Card */
+
+  .card {
+    @apply rounded border border-black text-white bg-black;
+  }
+
+  .card--white {
+    @apply card bg-white text-black  border-white;
+  }
+
+  .card__content {
+    @apply p-2 flex flex-col;
+  }
 }
