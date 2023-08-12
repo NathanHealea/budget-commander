@@ -15,7 +15,7 @@ export default function Home() {
               Rules
             </Link>
             <Link
-              href='/deck-validator'
+              href='/evaluation'
               className='button-contained w-full  md:w-1/2'
             >
               Deck Validator
