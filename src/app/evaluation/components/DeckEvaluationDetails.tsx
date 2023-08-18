@@ -64,6 +64,12 @@ export default function DeckEvaluationDetails(
         </div> */}
 
         <div className='flex flex-col text__body'>
+          <div className='flex flex-row gap-4 justify-center items-center p-2'>
+            <div className='min-w-[4em]'>Count</div>
+            <div className='flex-1'>Name</div>
+            <div className='text-right min-w-[4em]'>Price</div>
+          </div>
+
           {deckList.cards
             .filter((card: Card) => !card.hasError)
             .map((card, index) => (
@@ -71,12 +77,12 @@ export default function DeckEvaluationDetails(
                 key={index}
                 className='flex flex-row gap-4 justify-center items-center p-2'
               >
-                <div className=''>{card.count}</div>
+                <div className='min-w-[4em]'>{card.count}</div>
                 <div className='flex-1'>{card.name}</div>
                 <div className='flex flex-row justify-center items-center'>
                   <div className=' w-4'>$</div>
-                  <div className=' min-w-[4em] text-right'>
-                    {getCardPrintPrice(card.evaluatedPrint)}
+                  <div className=' min-w-[3em] text-right'>
+                    {card.evaluatedPrintPrice?.toFixed(2)}
                   </div>
                 </div>
               </div>

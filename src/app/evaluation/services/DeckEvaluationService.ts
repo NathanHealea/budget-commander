@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as scryfall from 'scryfall-api';
+import * as scryfall from 'scryfall-sdk';
 import { Card, CardEntry, DeckList, Print } from '../evaluation.types';
 import { default as createCard } from '../models/Card.model';
 /***
@@ -28,66 +28,33 @@ function parseCardEntry(cardrow: string): CardEntry {
   return (cardrow.match(DECK_ENTRY_REGEX)?.groups || {}) as CardEntry;
 }
 
-function getPrintPrice(card: any): number | null {
-  const price = parseFloat(
-    (card.finishes.includes('etched') && card.prices.usd_etched) ||
-      (card.finishes.includes('foil') &&
-        !card.finishes.includes('nonfoil') &&
-        card.prices.usd_foil) ||
-      card.prices.usd,
-  );
+/**
+ * Gets the lowest finished price of a card
+ * @param {scryfall.Card} card scryfall card object
+ * @returns null: no price was determined, number: lowest finished card price (etched, foil,non-foil)
+ */
+function getCardPrice(card: scryfall.Card): number | null {
+  let scryfallPrice = '';
 
-  // No price for the card has been determined, so return NaN
+  if (card.finishes.includes('etched')) {
+    scryfallPrice = card.prices.usd_etched || '';
+  }
+
+  if (card.finishes.includes('foil')) {
+    scryfallPrice = card.prices.usd_foil || '';
+  }
+
+  if (card.finishes.includes('nonfoil')) {
+    scryfallPrice = card.prices.usd || '';
+  }
+
+  const price = parseFloat(scryfallPrice);
+
   if (Number.isNaN(price)) {
     return null;
   }
 
   return price;
-}
-
-/**
- * Gets all prints of a card
- * @param {string} url scryfall url for retrieving prints.
- */
-async function getAllPrints(url?: string): Promise<Array<Print>> {
-  let scryfallCardPrints: Array<any> = [];
-  let prints: Array<Print> = [];
-  let has_more = false;
-
-  if (!url || isStringEmpty(url)) {
-    return [];
-  }
-
-  do {
-    let response = await axios.get(url);
-
-    if (response.status != 200) {
-      console.error(
-        `Get Print Request Failed: ${response.status} - ${response.statusText}`,
-      );
-
-      break;
-    }
-
-    let results = response.data;
-
-    has_more = results.has_more;
-
-    scryfallCardPrints = scryfallCardPrints.concat(results.data);
-  } while (has_more);
-
-  prints = scryfallCardPrints
-    .filter((card) => !card.digital && card.games.includes('paper'))
-    .map(
-      (card) =>
-        ({
-          imageUri: card.image_uris,
-          price: getPrintPrice(card),
-          set: card.set,
-          collectionNumber: card.collector_number,
-        }) as Print,
-    );
-  return prints;
 }
 
 function findPrint(
@@ -122,7 +89,10 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
   return new Promise((res, rej) => {
     setTimeout(async () => {
       try {
-        const scryfallCard = await scryfall.Cards.byName(cardEntry.name, true);
+        const scryfallCard: scryfall.Card = await scryfall.Cards.byName(
+          cardEntry.name,
+          true,
+        );
 
         if (scryfallCard == undefined) {
           throw new Error(`${cardEntry.name} - was not found`);
@@ -139,20 +109,42 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
             }),
           );
         } else {
-          const scryfallCardPrints = await getAllPrints(
-            scryfallCard.prints_search_uri,
+          const scryfallCardPrints = (await scryfallCard.getPrints())
+            // Filter out any prints that where digital release.
+            .filter((card) => !card.digital);
+
+          const evaluatedPrint = scryfallCardPrints.reduce(
+            (prev, curr) => {
+              if (
+                (prev.price == undefined && prev.print == undefined) ||
+                prev.price == null
+              ) {
+                return {
+                  price: getCardPrice(curr),
+                  print: curr,
+                } as { price?: number; print?: scryfall.Card };
+              }
+              const currCardPrice = getCardPrice(curr);
+
+              if (currCardPrice == null) {
+                return prev;
+              }
+
+              return prev.price < currCardPrice
+                ? prev
+                : ({ print: curr, price: currCardPrice } as {
+                    price?: number;
+                    print?: scryfall.Card;
+                  });
+            },
+            {} as { price?: number; print?: scryfall.Card },
           );
-
-          // Find the cheapest print
-          const evaluatedPrint = scryfallCardPrints
-            .filter((card: Print) => card.price !== null)
-            .reduce((prev, curr) => (curr.price < prev.price ? curr : prev));
-
           res(
             createCard({
               count: cardEntry.count,
               name: cardEntry.name,
-              evaluatedPrint: evaluatedPrint,
+              evaluatedPrint: evaluatedPrint.print,
+              evaluatedPrintPrice: evaluatedPrint.price,
             }),
           );
         }
@@ -189,11 +181,15 @@ async function evaluate(deckList: string) {
 
   // Calculate deck value
   deckListReturn.value = deckListReturn.cards.reduce((prev, curr) => {
-    if (curr.hasError || curr.evaluatedPrint == undefined) {
+    if (
+      curr.hasError ||
+      curr.evaluatedPrint == undefined ||
+      curr.evaluatedPrintPrice == undefined
+    ) {
       return prev;
     }
 
-    return prev + curr.count * curr.evaluatedPrint.price;
+    return prev + curr.count * curr.evaluatedPrintPrice;
   }, 0.0);
 
   return deckListReturn;

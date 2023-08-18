@@ -1,10 +1,13 @@
-import { Card as CardType, CardEntry, Print } from '../evaluation.types';
+import * as scryfall from 'scryfall-sdk';
+import { Card as CardType } from '../evaluation.types';
 
 interface ICardProps {
   count?: any;
   name?: string;
-  print?: Print;
-  evaluatedPrint?: Print;
+  print?: scryfall.Card;
+  printPrice?: number;
+  evaluatedPrint?: scryfall.Card;
+  evaluatedPrintPrice?: number;
   isBasic?: boolean;
   hasError?: boolean;
   message?: string | undefined;
@@ -13,8 +16,10 @@ interface ICardProps {
 export default function Card(props: ICardProps): CardType {
   let count: number = parseInt(props.count);
   let name: string = props.name || '';
-  let print: Print | undefined = props.print;
-  let evaluatedPrint: Print | undefined = props.evaluatedPrint;
+  let print: scryfall.Card | undefined = props.print;
+  let printPrice: number | undefined = props.printPrice;
+  let evaluatedPrint: scryfall.Card | undefined = props.evaluatedPrint;
+  let evaluatedPrintPrice: number | undefined = props.evaluatedPrintPrice;
   let isBasic: boolean = props.isBasic || false;
   let hasError: boolean = props.hasError || false;
   let message: string = props.message || '';
@@ -34,7 +39,9 @@ export default function Card(props: ICardProps): CardType {
     count,
     name,
     print,
+    printPrice,
     evaluatedPrint,
+    evaluatedPrintPrice,
     isBasic,
     hasError,
     message,

@@ -1,17 +1,12 @@
 import * as scryfall from 'scryfall-api';
 
-type Print = {
-  imageUri?: scryfall.ImageUris;
-  set: string;
-  collectionNumber: string;
-  price: number;
-};
-
 type Card = {
   count: number;
   name: string;
-  print?: Print;
-  evaluatedPrint?: Print;
+  print?: scryfall.Card;
+  printPrice?: number;
+  evaluatedPrint?: scryfall.Card;
+  evaluatedPrintPrice?: number;
   isBasic: boolean;
   hasError: boolean;
   message?: string;
