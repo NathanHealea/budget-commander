@@ -126,4 +126,29 @@
   .card__content {
     @apply p-2 flex flex-col;
   }
+
+  /* Table */
+  .table {
+    @apply flex flex-col text__body rounded overflow-hidden;
+  }
+
+  .table__row {
+    @apply flex flex-row gap-4 justify-center items-center p-2;
+  }
+
+  .table__header {
+    @apply table__row uppercase;
+  }
+
+  .table__row--striped {
+    @apply odd:bg-black odd:bg-opacity-20;
+  }
+
+  .table__col {
+    @apply flex-1;
+  }
+
+  .table__col--clickable {
+    @apply cursor-pointer;
+  }
 }
