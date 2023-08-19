@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, DeckList } from '../../evaluation.types';
-import DeckListTableView from './components/DeckListTableView';
+import { Card, DeckList } from '../evaluation.types';
+import DeckListTableView from './DeckListTableView';
 
 interface IDeckEvaluationDetailsProps {
   isSubmitting?: boolean;

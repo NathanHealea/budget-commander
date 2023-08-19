@@ -6,6 +6,7 @@ import DeckListEvaluationForm from './DeckEvaluationForm';
 import DeckEvaluationSpinner from './DeckEvaluationSpinner';
 import { DeckList } from '../evaluation.types';
 import DeckEvaluationService from '../services/DeckEvaluationService';
+import DeckListTableView from './DeckListTableView';
 
 type State = {
   isSubmitting: boolean;
