@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 const Links: Array<Link> = [
   { name: 'Home', href: '/' },
   { name: 'Rules', href: '/rules' },
-  { name: 'Deck Evaluation Tool', href:'/evaluation'}
+  { name: 'Deck Evaluation Tool', href: '/evaluation' },
 ];
 
 export default function RootLayout({
@@ -59,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='flex flex-col text-slate min-h-screen bg-gradient'>
+      <body className='flex flex-col min-h-screen'>
         <Navbar links={Links} />
         {children}
         <Footer />
