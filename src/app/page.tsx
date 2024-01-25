@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className='flex flex-1 flex-col items-center justify-center min-h-screen bg-base-200'>
-      <header className='hero min-h-screen'>
+    <main className='flex flex-1 flex-col items-center justify-center min-h-screen bg-base-200 px-8'>
+      <header className='hero flex-1'>
         <div className='hero-content text-center'>
           <div className='card shrink-0 w-full max-w-xl shadow-2xl bg-base-100'>
             <div className='card-body'>
