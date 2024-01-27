@@ -36,7 +36,7 @@ export default function RulesPage() {
   return (
     <main className='flex flex-1 flex-col gap-16 items-center  min-h-screen px-8'>
       <header className='flex w-full items-center justify-center h-36 my-8'>
-        <h1 className='font-bold'>Play Rules and Modifiers</h1>
+        <h1 className='text-center font-bold'>Play Rules and Modifiers</h1>
       </header>
 
       <Rule>

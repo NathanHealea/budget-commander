@@ -2,16 +2,16 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className='flex flex-1 flex-col items-center justify-center min-h-screen bg-base-200 px-8'>
+    <main className='flex flex-1 flex-col items-center justify-center min-h-screen bg-base-200 px-1 sm:px-8'>
       <header className='hero flex-1'>
         <div className='hero-content text-center'>
-          <div className='card shrink-0 w-full max-w-xl shadow-2xl bg-base-100'>
-            <div className='card-body'>
-              <h1 className='text-5xl font-bold'>Budget Commander</h1>
-              <p className='py-6'>
+          <div className='card shadow-2xl bg-base-100'>
+            <div className='card-body gap-8 md:gap-12'>
+              <h1 className='font-bold'>Budget Commander</h1>
+              <h3>
                 Magic the Gather Commander game variant where total deck value
                 must be under $100.
-              </p>
+              </h3>
               <div className='flex flex-col md:flex-row gap-4'>
                 <Link
                   href='/rules'
