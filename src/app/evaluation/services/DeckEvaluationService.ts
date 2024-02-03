@@ -57,33 +57,33 @@ function getCardPrice(card: scryfall.Card): number | null {
   return price;
 }
 
-function findPrint(
-  prints: Array<Print>,
-  set?: string,
-  collectorNumber?: string,
-): Print {
-  const defaultPrint: Print = { ...prints[0] };
-  if (!set || isStringEmpty(set)) {
-    return defaultPrint;
-  }
+// function findPrint(
+//   prints: Array<Print>,
+//   set?: string,
+//   collectorNumber?: string,
+// ): Print {
+//   const defaultPrint: Print = { ...prints[0] };
+//   if (!set || isStringEmpty(set)) {
+//     return defaultPrint;
+//   }
 
-  const doesMatch = (valueOne?: string, valueTwo?: string): boolean => {
-    if (isStringEmpty(valueOne) || isStringEmpty(valueTwo)) {
-      return false;
-    }
+//   const doesMatch = (valueOne?: string, valueTwo?: string): boolean => {
+//     if (isStringEmpty(valueOne) || isStringEmpty(valueTwo)) {
+//       return false;
+//     }
 
-    return valueOne?.toLocaleLowerCase() === valueTwo?.toLocaleLowerCase();
-  };
+//     return valueOne?.toLocaleLowerCase() === valueTwo?.toLocaleLowerCase();
+//   };
 
-  const printSetResult = prints.find(
-    (card) =>
-      (doesMatch(card.set, set) &&
-        doesMatch(card.collectionNumber, collectorNumber)) ||
-      doesMatch(card.set, set),
-  );
+//   const printSetResult = prints.find(
+//     (card) =>
+//       (doesMatch(card.set, set) &&
+//         doesMatch(card.collectionNumber, collectorNumber)) ||
+//       doesMatch(card.set, set),
+//   );
 
-  return printSetResult || defaultPrint;
-}
+//   return printSetResult || defaultPrint;
+// }
 
 function processCard(cardEntry: CardEntry): Promise<Card> {
   return new Promise((res, rej) => {
