@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className='footer footer-center p-10 '>
+    <footer className='footer footer-center p-10 mt-auto'>
       <aside>
         <p>
           Wizards of the Coast, Magic: The Gathering, and their logos are

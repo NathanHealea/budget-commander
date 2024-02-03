@@ -3,6 +3,11 @@
 @import 'tailwindcss/utilities';
 
 @layer base {
+  html,
+  body {
+    @apply flex flex-1 flex-col min-h-screen;
+  }
+
   /*  ---- Typography ---- */
 
   h1 {
@@ -30,5 +35,14 @@
 
   p {
     @apply text-base;
+  }
+
+  /* ---- Structure ---- */
+  .page {
+    @apply flex flex-1 flex-col items-center p-8 min-h-[calc(100vh-80px)];
+  }
+
+  .page-center {
+    @apply justify-center;
   }
 }

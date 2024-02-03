@@ -34,9 +34,11 @@ export const metadata: Metadata = {
 
 export default function RulesPage() {
   return (
-    <main className='flex flex-1 flex-col gap-16 items-center  min-h-screen px-8'>
-      <header className='flex w-full items-center justify-center h-36 my-8'>
-        <h1 className='text-center font-bold'>Play Rules and Modifiers</h1>
+    <main className='page gap-16'>
+      <header className='hero w-full items-center justify-center my-8 text-center'>
+        <div className='hero-content'>
+          <h1 className='text-center font-bold'>Play Rules and Modifiers</h1>
+        </div>
       </header>
 
       <Rule>

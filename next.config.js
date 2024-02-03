@@ -25,6 +25,14 @@ const nextConfig = {
 
     return webpackConfig;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cards.scryfall.io',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
