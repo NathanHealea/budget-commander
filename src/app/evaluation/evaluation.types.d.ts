@@ -3,10 +3,10 @@ import * as scryfall from 'scryfall-api';
 type Card = {
   count: number;
   name: string;
-  print?: scryfall.Card;
-  printPrice?: number;
+  print?: scryfall.Card | undefined;
+  printPrice?: number | undefined;
   evaluatedPrint?: scryfall.Card;
-  evaluatedPrintPrice?: number;
+  evaluatedPrintPrice?: number | undefined;
   isBasic: boolean;
   hasError: boolean;
   message?: string;

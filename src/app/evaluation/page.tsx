@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import Hero from './components/Hero';
-import DeckEvaluationTool from './components/DeckEvaluationTool';
+import Hero from './components/Hero.component';
+import DeckEvaluationTool from './components/DeckEvaluationTool.component';
 
 const PAGE_TITLE = 'Deck Evaluation Tool';
 const PAGE_DESCRIPTION =
@@ -29,12 +29,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DeckEvaluationPage() {
+export type DeckEvaluationPageProps = {};
+
+const DeckEvaluationPage = (props: DeckEvaluationPageProps) => {
   return (
-    <main className='flex flex-1 flex-col items-center justify-center '>
+    <main className='page bg-base-200 gap-8'>
       <Hero />
 
       <DeckEvaluationTool />
     </main>
   );
-}
+};
+
+export default DeckEvaluationPage;

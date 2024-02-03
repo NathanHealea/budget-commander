@@ -1,7 +1,7 @@
-import axios from 'axios';
 import * as scryfall from 'scryfall-sdk';
-import { Card, CardEntry, DeckList, Print } from '../evaluation.types';
+import { Card, CardEntry, DeckList } from '../evaluation.types';
 import { default as createCard } from '../models/Card.model';
+
 /***
  * @reference: https://github.com/SpaceCowMedia/commander-spellbook-site/blob/main/frontend/lib/decklist-parser.ts#L75
  */
@@ -100,54 +100,68 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
 
         // TODO check for Basic and Basic Snow-Covered Lands
 
-        if (scryfallCard.type_line.includes('Basic')) {
-          res(
-            createCard({
-              count: cardEntry.count,
-              name: cardEntry.name,
-              isBasic: true,
-            }),
-          );
-        } else {
-          const scryfallCardPrints = (await scryfallCard.getPrints())
-            // Filter out any prints that where digital release.
-            .filter((card) => !card.digital);
+        // if (scryfallCard.type_line.includes('Basic')) {
+        //   res(
+        //     createCard({
+        //       count: cardEntry.count,
+        //       name: scryfallCard.name,
+        //       isBasic: true,
+        //     }),
+        //   );
+        // } else {
+        const scryfallCardPrints = (await scryfallCard.getPrints())
+          // Filter out any prints that where digital release.
+          .filter((card) => !card.digital);
 
-          const evaluatedPrint = scryfallCardPrints.reduce(
-            (prev, curr) => {
-              if (
-                (prev.price == undefined && prev.print == undefined) ||
-                prev.price == null
-              ) {
-                return {
-                  price: getCardPrice(curr),
-                  print: curr,
-                } as { price?: number; print?: scryfall.Card };
-              }
-              const currCardPrice = getCardPrice(curr);
+        const evaluatedPrint = scryfallCardPrints.reduce(
+          (prev, curr) => {
+            if (
+              (prev.price == undefined && prev.print == undefined) ||
+              prev.price == null
+            ) {
+              return {
+                price: getCardPrice(curr),
+                print: curr,
+              } as { price?: number; print?: scryfall.Card };
+            }
+            const currCardPrice = getCardPrice(curr);
 
-              if (currCardPrice == null) {
-                return prev;
-              }
+            if (currCardPrice == null) {
+              return prev;
+            }
 
-              return prev.price < currCardPrice
-                ? prev
-                : ({ print: curr, price: currCardPrice } as {
-                    price?: number;
-                    print?: scryfall.Card;
-                  });
-            },
-            {} as { price?: number; print?: scryfall.Card },
-          );
-          res(
-            createCard({
-              count: cardEntry.count,
-              name: cardEntry.name,
-              evaluatedPrint: evaluatedPrint.print,
-              evaluatedPrintPrice: evaluatedPrint.price,
-            }),
-          );
-        }
+            return prev.price < currCardPrice
+              ? prev
+              : ({ print: curr, price: currCardPrice } as {
+                  price?: number;
+                  print?: scryfall.Card;
+                });
+          },
+          {} as { price?: number; print?: scryfall.Card },
+        );
+
+        const getPrintPrice = () => {
+          let price = scryfallCard.getCost();
+
+          if (!price) {
+            return undefined;
+          }
+
+          return parseFloat(price);
+        };
+
+        res(
+          createCard({
+            count: cardEntry.count,
+            name: scryfallCard.name,
+            isBasic: scryfallCard.type_line.includes('Basic') ? true : false,
+            evaluatedPrint: evaluatedPrint.print,
+            evaluatedPrintPrice: evaluatedPrint.price,
+            print: scryfallCard,
+            printPrice: getPrintPrice(),
+          }),
+        );
+        // }
       } catch (error: any) {
         // card card to deck list with error
         res(
@@ -184,7 +198,8 @@ async function evaluate(deckList: string) {
     if (
       curr.hasError ||
       curr.evaluatedPrint == undefined ||
-      curr.evaluatedPrintPrice == undefined
+      curr.evaluatedPrintPrice == undefined ||
+      curr.isBasic
     ) {
       return prev;
     }

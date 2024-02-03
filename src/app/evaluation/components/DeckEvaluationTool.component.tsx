@@ -1,22 +1,25 @@
 'use client';
 import { useState } from 'react';
-import DeckEvaluationDetails from './DeckEvaluationDetails';
-import DeckEvaluationErrors from './DeckEvaluationErrors';
-import DeckListEvaluationForm from './DeckEvaluationForm';
-import DeckEvaluationSpinner from './DeckEvaluationSpinner';
+import DeckEvaluationDetails from './DeckEvaluationDetails.component';
+import DeckEvaluationErrors from './DeckEvaluationErrors.component';
+import DeckListEvaluationForm from './DeckEvaluationForm.component';
+import DeckEvaluationSpinner from './DeckEvaluationSpinner.component';
 import { DeckList } from '../evaluation.types';
 import DeckEvaluationService from '../services/DeckEvaluationService';
+import initializeDeckList from '../utilities/initializeDeckList.utility';
 
-type State = {
+type DeckEvaluationToolState = {
   isSubmitting: boolean;
-  deckList: DeckList | null;
+  deckList?: DeckList;
 };
 
-export default function DeckEvaluationTool() {
-  const [state, setState] = useState<State>({
+export type DeckEvaluationToolProps = {};
+
+const DeckEvaluationTool = (props: DeckEvaluationToolProps) => {
+  const [state, setState] = useState<DeckEvaluationToolState>(() => ({
     isSubmitting: false,
-    deckList: null,
-  });
+    deckList: initializeDeckList(),
+  }));
 
   const handleDeckListEvaluation = async (decklist: string) => {
     setState({
@@ -25,7 +28,7 @@ export default function DeckEvaluationTool() {
     });
 
     const deckList = await DeckEvaluationService.evaluate(decklist);
-    console.log(deckList);
+
     setState({
       ...state,
       isSubmitting: false,
@@ -52,4 +55,6 @@ export default function DeckEvaluationTool() {
       />
     </>
   );
-}
+};
+
+export default DeckEvaluationTool;
