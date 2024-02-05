@@ -12,7 +12,7 @@ const DeckListVisual = (props: DeckListVisualProps) => {
     return null;
   }
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 just'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-8 just'>
       {deckList
         .filter((card: Card) => !card.hasError)
         .map((card, index) => (
@@ -21,7 +21,7 @@ const DeckListVisual = (props: DeckListVisualProps) => {
             className='flex justify-center items-center'
           >
             <div className='relative rounded-xl  w-[126px] text-center flex gap-4 flex-col'>
-              <CardPrint {...card.evaluatedPrint} />
+              <CardPrint {...card.print} />
 
               <div className='absolute flex justify-center items-center -top-1 -right-1 h-8 w-8 rounded-full badge-primary'>
                 <span className='text-xs'>{card.count}</span>

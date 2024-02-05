@@ -18,6 +18,7 @@ const DeckListTable = (props: DeckListTableProps) => {
           <th className='w-24'>Count</th>
           <th>Name</th>
           <th className='w-24 text-right'>Price</th>
+          {/* <th className='w-24 text-right'>Print Price</th> */}
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,9 @@ const DeckListTable = (props: DeckListTableProps) => {
               <td className='w-24 text-right'>
                 {!card.isBasic && card.evaluatedPrintPrice?.toFixed(2)}
               </td>
+              {/* <td className='w-24 text-right'>
+                {!card.isBasic && card.printPrice?.toFixed(2)}
+              </td> */}
             </tr>
           ))}
       </tbody>

@@ -4,6 +4,7 @@ import { default as createCard } from '../models/Card.model';
 
 /***
  * @reference: https://github.com/SpaceCowMedia/commander-spellbook-site/blob/main/frontend/lib/decklist-parser.ts#L75
+ * TODO: Expand DECK ENTRY REGEX to include collection number and finish.
  */
 const DECK_ENTRY_REGEX =
   // /^\s*(?:(?<count>\d+)[xX]?\s+)?(?<name>[^/\s].+?)\s*\((?<set>[^)]+)\)\s*(?<print>\d+)/;
@@ -57,34 +58,6 @@ function getCardPrice(card: scryfall.Card): number | null {
   return price;
 }
 
-// function findPrint(
-//   prints: Array<Print>,
-//   set?: string,
-//   collectorNumber?: string,
-// ): Print {
-//   const defaultPrint: Print = { ...prints[0] };
-//   if (!set || isStringEmpty(set)) {
-//     return defaultPrint;
-//   }
-
-//   const doesMatch = (valueOne?: string, valueTwo?: string): boolean => {
-//     if (isStringEmpty(valueOne) || isStringEmpty(valueTwo)) {
-//       return false;
-//     }
-
-//     return valueOne?.toLocaleLowerCase() === valueTwo?.toLocaleLowerCase();
-//   };
-
-//   const printSetResult = prints.find(
-//     (card) =>
-//       (doesMatch(card.set, set) &&
-//         doesMatch(card.collectionNumber, collectorNumber)) ||
-//       doesMatch(card.set, set),
-//   );
-
-//   return printSetResult || defaultPrint;
-// }
-
 function processCard(cardEntry: CardEntry): Promise<Card> {
   return new Promise((res, rej) => {
     setTimeout(async () => {
@@ -98,17 +71,6 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
           throw new Error(`${cardEntry.name} - was not found`);
         }
 
-        // TODO check for Basic and Basic Snow-Covered Lands
-
-        // if (scryfallCard.type_line.includes('Basic')) {
-        //   res(
-        //     createCard({
-        //       count: cardEntry.count,
-        //       name: scryfallCard.name,
-        //       isBasic: true,
-        //     }),
-        //   );
-        // } else {
         const scryfallCardPrints = (await scryfallCard.getPrints())
           // Filter out any prints that where digital release.
           .filter((card) => !card.digital);
@@ -140,15 +102,20 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
           {} as { price?: number; print?: scryfall.Card },
         );
 
-        const getPrintPrice = () => {
-          let price = scryfallCard.getCost();
+        // TODO: determine card price of the card listed in the card entry.
+        // const getPrintPrice = () => {
+        //   let cardFinish = scryfallCard.fini
 
-          if (!price) {
-            return undefined;
-          }
+        //   let price = '';
 
-          return parseFloat(price);
-        };
+        //   if(scryfallCard.)
+
+        //   if (!price) {
+        //     return undefined;
+        //   }
+
+        //   return parseFloat(price);
+        // };
 
         res(
           createCard({
@@ -158,7 +125,7 @@ function processCard(cardEntry: CardEntry): Promise<Card> {
             evaluatedPrint: evaluatedPrint.print,
             evaluatedPrintPrice: evaluatedPrint.price,
             print: scryfallCard,
-            printPrice: getPrintPrice(),
+            // printPrice: getPrintPrice(),
           }),
         );
         // }
