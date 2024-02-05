@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-import Navbar, { Link } from '@/components/Header';
-import Footer from '@/components/Footer';
+import Navbar, { Link } from '@/components/Header.component';
+import Footer from '@/components/Footer.component';
 
 config.autoAddCss = false;
 

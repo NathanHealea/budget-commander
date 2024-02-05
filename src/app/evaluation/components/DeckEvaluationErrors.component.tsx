@@ -3,8 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Card, DeckList } from '../evaluation.types';
 import { Disclosure } from '@headlessui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface IDeckEvaluationErrorsProps {
   isSubmitting?: boolean;
@@ -40,19 +38,7 @@ export default function DeckEvaluationErrors(
                   <div>Errors</div>
                   <div className='p-2'>{errorList.length}</div>
                   <span className='flex-1'></span>
-                  {open ? (
-                    <FontAwesomeIcon
-                      icon={faChevronUp}
-                      className='block h-6 w-6'
-                      aria-hidden='true'
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faChevronDown}
-                      className='block h-6 w-6'
-                      aria-hidden='true'
-                    />
-                  )}
+                  {open ? <>Chevron up</> : <>Chevron down</>}
                 </Disclosure.Button>
                 <Disclosure.Panel className=''>
                   <div className='flex flex-col text__body'>
