@@ -8,12 +8,12 @@ import {
   Squares2X2Icon,
   XMarkIcon,
 } from '@heroicons/react/24/solid';
-import DeckListVisual from './DeckListVisual.component';
-import DeckListTable from './DeckListTable.component';
-import SortButton from './SortButton.component';
-import DisplayButton from './DisplayButton.component';
+import DeckListVisual from './DeckListVisual';
+import DeckListTable from './DeckListTable';
+import SortButton from './SortButton';
+import DisplayButton from './DisplayButton';
 import sortArray from 'sort-array';
-import initializeDeckList from '../utilities/initializeDeckList.utility';
+import initializeDeckList from '../utilities/initializeDeckList';
 
 type DeckEvaluationDetailsProps = {
   isSubmitting?: boolean;

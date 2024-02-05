@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import DeckEvaluationDetails from './DeckEvaluationDetails.component';
-import DeckEvaluationErrors from './DeckEvaluationErrors.component';
-import DeckListEvaluationForm from './DeckEvaluationForm.component';
-import DeckEvaluationSpinner from './DeckEvaluationSpinner.component';
+import DeckEvaluationDetails from './DeckEvaluationDetails';
+import DeckEvaluationErrors from './DeckEvaluationErrors';
+import DeckListEvaluationForm from './DeckEvaluationForm';
+import DeckEvaluationSpinner from './DeckEvaluationSpinner';
 import { DeckList } from '../evaluation.types';
-import DeckEvaluationService from '../services/DeckEvaluationService';
-import initializeDeckList from '../utilities/initializeDeckList.utility';
+import DeckEvaluationService from '../services/deckEvaluation';
+import initializeDeckList from '../utilities/initializeDeckList';
 
 type DeckEvaluationToolState = {
   isSubmitting: boolean;

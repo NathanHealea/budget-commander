@@ -1,7 +1,7 @@
 'use client';
 import { Card, DeckList } from '../evaluation.types';
 import Image from 'next/image';
-import CardPrint from './CardPrint.components';
+import CardPrint from './CardPrint';
 type DeckListVisualProps = {
   deckList?: Array<Card>;
 };

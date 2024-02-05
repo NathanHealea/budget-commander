@@ -1,13 +1,9 @@
 import '../styles/globals.css';
 
 import type { Metadata } from 'next';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import Navbar, { Link } from '@/components/Header.component';
 import Footer from '@/components/Footer.component';
-
-config.autoAddCss = false;
 
 const DEFAULT_TITLE = 'Budget Commander';
 const DEFAULT_DESCRIPTION =
