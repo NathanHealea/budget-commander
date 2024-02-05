@@ -1,7 +1,5 @@
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faCopyright } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import GitHubIcon from './icons/Github';
 
 export default function Footer() {
   return (
@@ -43,8 +41,7 @@ export default function Footer() {
           recommends you see stores for final prices and details.
         </p>
         <p>
-          Copyright <FontAwesomeIcon icon={faCopyright} />{' '}
-          {new Date().getFullYear()}{' '}
+          Copyright &copy; {new Date().getFullYear()}{' '}
           <a
             className='link link-primary no-underline'
             target='_blank'
@@ -54,13 +51,13 @@ export default function Footer() {
           </a>
         </p>
         <p>Built with TailwindCSS, NextJS, &amp; ❤️ for Magic the Gathering</p>
-        <p>
+        <p className='flex items-center justify-center'>
           View on
           <Link
             href='https://github.com/NathanHealea/budget-commander'
-            className='link link-primary no-underline mx-2'
+            className='link link-primary no-underline inline-flex mx-2 gap-2 justify-center items-center'
           >
-            <FontAwesomeIcon icon={faGithub} /> Github
+            <GitHubIcon className='w-4 h-4 inline fill-primary' /> Github
           </Link>
         </p>
       </aside>

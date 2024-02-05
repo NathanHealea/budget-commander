@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import Hero from './components/Hero.component';
-import DeckEvaluationTool from './components/DeckEvaluationTool.component';
+import Hero from './components/Hero';
+import DeckEvaluationTool from './components/DeckEvaluationTool';
 
 const PAGE_TITLE = 'Deck Evaluation Tool';
 const PAGE_DESCRIPTION =
