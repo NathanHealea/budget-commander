@@ -1,8 +1,5 @@
 'use client';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Transition } from '@headlessui/react';
-import classNames from 'classnames';
 
 export type DeckEvaluationSpinnerProps = {
   isSubmitting?: boolean;
